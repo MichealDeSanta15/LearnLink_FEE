@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnLink | Next-Gen Academic Networking</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Boxicons for high-quality SVG icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Glowing Blobs in Background -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <!-- Transparent Navigation Bar -->
+    <header id="header">
+        <div class="logo">
+            <i class='bx bxs-network-chart'></i>
+            <span>Learn<b>Link</b></span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Discover</a></li>
+                <li><a href="#mentors">Mentors</a></li>
+                <li><a href="#projects">Projects</a></li>
+
+                <!-- Theme Toggle Button -->
+                <li><button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon' id="themeIcon"></i></button></li>
+                <!-- Easter Egg Badge (Hidden by default) -->
+                <li id="easterEggBadge" style="display: none;" title="Master Networker"><span class="badge" style="margin-bottom:0; background:rgba(255, 215, 0, 0.2); color:#ffd700; border-color:#ffd700;"><i class='bx bxs-trophy'></i> Pro</span></li>
+                <li><button class="btn-glow" onclick="showModal('Login')">Login <i class='bx bx-log-in'></i></button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero fade-in">
+            <!-- Canvas Network Background -->
+            <canvas id="networkCanvas"></canvas>
+            <div class="hero-content">
+                <div class="badge">Chitkara University</div>
+                <!-- The h1 span will be manipulated by JavaScript -->
+                <h1 class="glitch-text" id="typewriter"></h1>
+                <p style="margin-bottom: 25px;">Unlock your potential. Find the perfect mentor, master new skills, and collaborate on groundbreaking projects within our campus ecosystem.</p>
+                <div style="margin-bottom: 40px; display:flex; gap:15px;">
+                    <button class="btn-glow" onclick="document.querySelector('.search-glass input').focus()">Get Started</button>
+
+                </div>
+                
+                <!-- Quote Banner (Real-time API) -->
+                <div id="quoteBanner" style="background: rgba(255,255,255,0.05); border-left: 4px solid var(--primary); padding: 15px; border-radius: 8px; margin-bottom: 30px; backdrop-filter: blur(10px); max-width: 500px;">
+                    <i class='bx bxs-quote-alt-left' style="color:var(--primary); font-size:24px;"></i>
+                    <p id="quoteText" style="font-size:15px; font-style:italic; margin:5px 0 10px; color:var(--text-main);">Loading daily inspiration...</p>
+                    <small id="quoteAuthor" style="color:var(--text-muted); font-weight:bold;">- LearnLink Engine</small>
+                </div>
+                
+                <!-- Glassmorphism Search Bar -->
+                <div class="search-glass">
+                    <i class='bx bx-search'></i>
+                    <input type="text" id="searchInput" placeholder="Search skills: MongoDB, AI, React..." onkeyup="filterMentors()">
+                    <button class="btn-glow" onclick="document.getElementById('mentors').scrollIntoView({behavior: 'smooth'})">Explore</button>
+                </div>
+            </div>
+            
+            <!-- 3D Floating Tech Icons -->
+            <div class="hero-visual">
+                <div class="floating-icon icon-1"><i class='bx bxl-mongodb'></i></div>
+                <div class="floating-icon icon-2"><i class='bx bxl-react'></i></div>
+                <div class="floating-icon icon-3"><i class='bx bxl-python'></i></div>
+                <div class="floating-icon icon-4"><i class='bx bxl-nodejs'></i></div>
+            </div>
+        </section>
+
+        <!-- Mentors Section -->
+        <section id="mentors" class="section-padding">
+            <div class="section-header fade-in">
+                <h2>Top Campus Mentors</h2>
+                <p>Learn directly from industry-experienced faculty and view their schedules.</p>
+            </div>
+
+            <div class="grid-container" id="mentorGrid">
+                
+                <!-- Mentor Card 1 (Now with deep profile data attached) -->
+                <div class="glass-card mentor-card fade-in" 
+                    data-skills="mongodb nodejs web database"
+                    data-name="Dr. Amit Sharma"
+                    data-img="https://ui-avatars.com/api/?name=Amit+Sharma&background=cc0000&color=fff&size=150"
+                    data-dept="Dept. of CSE"
+                    data-github="andrew"
+                    data-bio="Dr. Amit is a senior professor specializing in full-stack web architectures. He leads the advanced web development lab and actively mentors students seeking careers in modern backend systems."
+                    data-timings="Mon 10:00 AM - 12:00 PM|Wed 2:00 PM - 4:00 PM">
+                    <div class="card-glow"></div>
+                    <div class="profile-img"><img src="https://ui-avatars.com/api/?name=Amit+Sharma&background=cc0000&color=fff&size=150" alt="Dr. Amit"></div>
+                    <h3>Dr. Amit Sharma</h3>
+                    <div class="dept">Dept. of CSE</div>
+                    <div class="skills-tags">
+                        <span>MongoDB</span><span>Node.js</span>
+                    </div>
+                    <div class="stats">
+                        <div><i class='bx bxs-star'></i> 4.9</div>
+                        <div><i class='bx bxs-user-detail'></i> 120+ Mentees</div>
+                    </div>
+                    <button class="btn-outline" onclick="openProfile(this)">View Profile</button>
+                </div>
+
+                <!-- Mentor Card 2 -->
+                <div class="glass-card mentor-card fade-in" 
+                    data-skills="python AI machine learning data"
+                    data-name="Ms. Neha Gupta"
+                    data-img="https://ui-avatars.com/api/?name=Neha+Gupta&background=2d3436&color=fff&size=150"
+                    data-dept="Dept. of BCA"
+                    data-github="karpathy"
+                    data-bio="Ms. Neha has a deep passion for Artificial Intelligence and neural networks. She coordinates the AI research division and frequently hosts open workshops for aspiring data scientists."
+                    data-timings="Tue 11:30 AM - 1:30 PM|Fri 3:00 PM - 5:00 PM">
+                    <div class="card-glow"></div>
+                    <div class="profile-img"><img src="https://ui-avatars.com/api/?name=Neha+Gupta&background=2d3436&color=fff&size=150" alt="Ms. Neha"></div>
+                    <h3>Ms. Neha Gupta</h3>
+                    <div class="dept">Dept. of BCA</div>
+                    <div class="skills-tags">
+                        <span>Python</span><span>AI / ML</span>
+                    </div>
+                    <div class="stats">
+                        <div><i class='bx bxs-star'></i> 5.0</div>
+                        <div><i class='bx bxs-user-detail'></i> 85+ Mentees</div>
+                    </div>
+                    <button class="btn-outline" onclick="openProfile(this)">View Profile</button>
+                </div>
+
+                 <!-- Mentor Card 3 -->
+                 <div class="glass-card mentor-card fade-in" 
+                    data-skills="react javascript frontend web design"
+                    data-name="Mr. Rahul Verma"
+                    data-img="https://ui-avatars.com/api/?name=Rahul+Verma&background=0984e3&color=fff&size=150"
+                    data-dept="Dept. of CSE"
+                    data-github="facebook"
+                    data-bio="Mr. Rahul focuses on creating pixel-perfect, highly responsive front-end applications. With 5 years of industry experience before joining Chitkara, his UI/UX courses are widely popular."
+                    data-timings="Thu 09:00 AM - 11:00 AM">
+                    <div class="card-glow"></div>
+                    <div class="profile-img"><img src="https://ui-avatars.com/api/?name=Rahul+Verma&background=0984e3&color=fff&size=150" alt="Mr. Rahul"></div>
+                    <h3>Mr. Rahul Verma</h3>
+                    <div class="dept">Dept. of CSE</div>
+                    <div class="skills-tags">
+                        <span>React</span><span>Frontend</span>
+                    </div>
+                    <div class="stats">
+                        <div><i class='bx bxs-star'></i> 4.7</div>
+                        <div><i class='bx bxs-user-detail'></i> 200+ Mentees</div>
+                    </div>
+                    <button class="btn-outline" onclick="openProfile(this)">View Profile</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section-padding">
+            <div class="section-header fade-in">
+                <h2>Active R&D Projects</h2>
+                <p>Join forces with mentors to build real-world solutions</p>
+            </div>
+
+            <div class="grid-container">
+                <div class="glass-card project-card fade-in">
+                    <div class="card-glow"></div>
+                    <div class="proj-header">
+                        <span class="status pulse">Recruiting</span>
+                        <i class='bx bx-bot'></i>
+                    </div>
+                    <h3>Smart Campus AI Bot</h3>
+                    <p>Building an intelligent assistant for Chitkara students using NLP and Python. Looking for 2 dedicated developers.</p>
+                    <div class="proj-meta">
+                        <span><i class='bx bx-user'></i> Lead: Dr. Amit</span>
+                        <span><i class='bx bx-time'></i> 3 Months</span>
+                    </div>
+                    <button class="btn-glow w-100" onclick="showModal('Applying for Smart Campus AI Bot')">Submit Portfolio</button>
+                </div>
+                
+                <div class="glass-card project-card fade-in">
+                    <div class="card-glow"></div>
+                    <div class="proj-header">
+                        <span class="status pulse">Recruiting</span>
+                        <i class='bx bx-data'></i>
+                    </div>
+                    <h3>Student Analytics Dashboard</h3>
+                    <p>A full-stack project using React & Node to visualize student performance metrics.</p>
+                    <div class="proj-meta">
+                        <span><i class='bx bx-user'></i> Lead: Mr. Rahul</span>
+                        <span><i class='bx bx-time'></i> 2 Months</span>
+                    </div>
+                    <button class="btn-glow w-100" onclick="showModal('Applying for Analytics Dashboard')">Submit Portfolio</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section-padding" style="display: none;">
+            <div class="section-header fade-in">
+                <h2>My Dashboard</h2>
+                <p>Track your upcoming mentorship sessions and project applications.</p>
+            </div>
+            <div class="grid-container" id="dashboardGrid">
+                <!-- Skill Analytics Canvas -->
+                <div class="glass-card fade-in" id="chartCard" style="grid-column: 1 / -1; text-align: center;">
+                    <h3>Your Skill Progress</h3>
+                    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">Based on your activity and mentorships</p>
+                    <canvas id="skillsChart" width="800" height="250" style="max-width:100%; border-radius:12px; background:rgba(0,0,0,0.1);"></canvas>
+                </div>
+
+                <!-- Dashboard items will be injected here via JS -->
+                <div class="glass-card fade-in" id="emptyDashboardMsg" style="grid-column: 1 / -1; text-align: center;">
+                    <i class='bx bx-folder-open' style="font-size: 50px; color: var(--text-muted); margin-bottom: 15px;"></i>
+                    <h3>No Active Items</h3>
+                    <p style="color: var(--text-muted);">You haven't booked any sessions or applied to projects yet. Explore the platform to get started!</p>
+                </div>
+            </div>
+            
+            <!-- Dev.to Live Tech News section -->
+            <div class="section-header fade-in" style="margin-top: 60px;">
+                <h2>Latest Tech News</h2>
+                <p>Live feed powered by the Dev.to Global API</p>
+            </div>
+            <div class="grid-container" id="newsGrid">
+                <!-- News widgets injected via JS -->
+                <p style="text-align:center; grid-column: 1/-1; color:var(--text-muted);">Fetching news articles...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- General Purpose Custom Modal Popup -->
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-content glass-card" id="formModalContainer">
+            <button class="close-btn" onclick="closeModal()"><i class='bx bx-x'></i></button>
+            <i class='bx bxs-rocket modal-icon' id="modalIcon"></i>
+            <h2 id="modalTitle">Connecting...</h2>
+            
+            <!-- Default Info (For Booking/Applying) -->
+            <div id="modalDefaultBody">
+                <p id="modalDesc">Ready to take the next step in your career? Our university integration securely connects your profile.</p>
+                <button id="modalActionBtn" class="btn-glow w-100" style="margin-top: 20px; justify-content: center;" onclick="confirmPendingAction()">Confirm Action</button>
+            </div>
+
+            <!-- New Advanced Login Form Body -->
+            <form id="loginFormBody" style="display: none; text-align: left; margin-top:20px;" onsubmit="handleLoginSubmit(event)">
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size:14px; color:var(--text-muted); margin-bottom:5px; display:block;">Role</label>
+                    <select id="roleInput" required style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--surface-border); background:rgba(255,255,255,0.05); color:var(--text-main); font-family:var(--font-main); outline:none;">
+                        <option value="student" style="color: black;">Student</option>
+                        <option value="teacher" style="color: black;">Teacher</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="font-size:14px; color:var(--text-muted); margin-bottom:5px; display:block;">University Email</label>
+                    <input type="email" id="emailInput" required placeholder="name@chitkara.edu.in" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--surface-border); background:rgba(255,255,255,0.05); color:var(--text-main); font-family:var(--font-main); outline:none;">
+                </div>
+                <div style="margin-bottom: 15px; position:relative;">
+                    <label style="font-size:14px; color:var(--text-muted); margin-bottom:5px; display:block;">Password</label>
+                    <input type="password" id="passwordInput" required placeholder="••••••••" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--surface-border); background:rgba(255,255,255,0.05); color:var(--text-main); font-family:var(--font-main); outline:none;">
+                    <i class='bx bx-show' id="togglePasswordBtn" onclick="togglePasswordVisibility()" style="position:absolute; right:15px; top:35px; color:var(--text-muted); cursor:pointer; font-size:18px;"></i>
+                    <div style="height:6px; background:var(--surface-border); border-radius:3px; margin-top:8px; overflow:hidden;">
+                        <div id="passwordStrengthBar" style="height:100%; width:0%; background:#ff4d4d; transition:all 0.3s ease;"></div>
+                    </div>
+                    <small id="passwordFeedback" style="color:var(--text-muted); font-size:12px; margin-top:5px; display:block;">Enter a password</small>
+                </div>
+                <button type="submit" class="btn-glow w-100" style="justify-content:center; margin-top: 10px;">Login securely</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Teacher Specific Profile Modal -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-content glass-card profile-modal-content">
+            <button class="close-btn" onclick="closeProfileModal()"><i class='bx bx-x'></i></button>
+            
+            <div class="profile-header">
+                <img id="p-img" src="" alt="Profile">
+                <div>
+                    <h2 id="p-name">Teacher Name</h2>
+                    <div class="dept" id="p-dept" style="margin-top: 5px;">Department</div>
+                </div>
+            </div>
+
+            <div class="profile-body">
+                <h3>About Mentor</h3>
+                <p id="p-bio">Biography goes here...</p>
+                
+                <h3>Available Timings (Drag to select)</h3>
+                <ul id="p-timings" class="timing-list">
+                    <!-- Javascript will dynamically inject the schedule here -->
+                </ul>
+
+                <!-- Dropzone for Drag-and-Drop Schedule Builder -->
+                <div id="scheduleDropzone" class="dropzone">
+                    <i class='bx bx-calendar-plus'></i>
+                    <span>Drag a time slot here to select</span>
+                </div>
+                
+
+            </div>
+
+            <button id="bookSessionBtn" class="btn-glow w-100" style="margin-top: 20px; justify-content: center;" onclick="bookFromProfile()">
+                Request Mentorship Session
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Video Player Modal -->
+    <div id="videoModal" class="modal-overlay">
+        <div class="modal-content glass-card" style="max-width: 800px; padding: 20px; background: #000;">
+            <button class="close-btn" onclick="closeVideoModal()" style="color:#fff; z-index: 10;"><i class='bx bx-x'></i></button>
+            <div class="video-container" style="position: relative; border-radius: 12px; overflow: hidden; background: #000;">
+                <video id="promoVideo" src="https://www.w3schools.com/html/mov_bbb.mp4" style="width: 100%; display: block;" playsinline></video>
+                
+                <!-- Custom Controls Layer -->
+                <div id="videoControls" class="video-controls">
+                    <button class="play-pause-btn" onclick="togglePlayPause()"><i class='bx bx-play' id="playPauseIcon"></i></button>
+                    <div class="progress-bar-container" id="progressContainer" onclick="seekVideo(event)">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <span id="timeDisplay" style="font-size:12px; color:#fff; min-width:80px; text-align:center; font-family: monospace;">0:00 / 0:00</span>
+                    <button class="volume-btn" onclick="toggleMute()"><i class='bx bx-volume-full' id="volumeIcon"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo justify-center"><i class='bx bxs-network-chart'></i> LearnLink</div>
+            <p style="margin-top: 10px; color: #a0aab2; font-size: 14px;">Empowering the Chitkara ecosystem through focused mentorship. Created for FEE-1.</p>
+        </div>
+    </footer>
+
+    <!-- ==================================
+         AI CHATBOT WIDGET
+         ================================== -->
+    <!-- Floating Chatbot Button -->
+    <button class="chatbot-toggler btn-glow" onclick="toggleChatbot()">
+        <i class='bx bx-message-dots'></i>
+    </button>
+
+    <!-- Chatbot UI Window -->
+    <div class="chatbot-popup glass-card" id="chatbotUI">
+        <div class="chat-header">
+            <div class="bot-info">
+                <i class='bx bx-bot'></i>
+                <span>LearnLink AI</span>
+            </div>
+            <button class="close-chat" onclick="toggleChatbot()"><i class='bx bx-x'></i></button>
+        </div>
+        
+        <div class="chat-body" id="chatBody">
+            <!-- Messages appear here -->
+            <div class="message bot-message">
+                Hi! I'm your LearnLink AI assistant. How can I help you find a mentor or project today?
+            </div>
+        </div>
+        
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Ask me something..." onkeypress="handleEnter(event)">
+            <button onclick="handleSend()"><i class='bx bxs-send'></i></button>
+        </div>
+    </div>
+
+    <!-- Linking external JS -->
+    <script src="script.js"></script>
+</body>
+</html>
