@@ -32,7 +32,8 @@
                 <li><button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon' id="themeIcon"></i></button></li>
                 <!-- Easter Egg Badge (Hidden by default) -->
                 <li id="easterEggBadge" style="display: none;" title="Master Networker"><span class="badge" style="margin-bottom:0; background:rgba(255, 215, 0, 0.2); color:#ffd700; border-color:#ffd700;"><i class='bx bxs-trophy'></i> Pro</span></li>
-                <li><button class="btn-glow" onclick="showModal('Login')">Login <i class='bx bx-log-in'></i></button></li>
+                <li><button class="btn-glow" id="navLoginBtn" onclick="showModal('Login')">Login <i class='bx bx-log-in'></i></button></li>
+                <li id="navLogoutLi" style="display: none;"><button class="btn-outline" style="border-color: #ff4d4d; color: #ff4d4d;" onclick="handleLogout()">Logout <i class='bx bx-log-out'></i></button></li>
             </ul>
         </nav>
     </header>

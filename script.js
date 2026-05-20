@@ -963,7 +963,7 @@ window.handleLoginSubmit = function(e) {
         showToast(`Authenticated successfully as ${roleInput.value}.`);
         
         // Update global Nav state
-        const loginNavBtn = document.querySelector('button[onclick="showModal(\'Login\')"]');
+        const loginNavBtn = document.getElementById('navLoginBtn') || document.querySelector('button[onclick="showModal(\'Login\')"]');
         if(loginNavBtn) {
             loginNavBtn.innerHTML = "Dashboard <i class='bx bx-user'></i>";
             loginNavBtn.onclick = showDashboard;
@@ -972,8 +972,38 @@ window.handleLoginSubmit = function(e) {
             loginNavBtn.style.color = "var(--primary)";
             loginNavBtn.style.borderColor = "var(--primary)";
         }
+        
+        const logoutLi = document.getElementById('navLogoutLi');
+        if(logoutLi) logoutLi.style.display = 'inline-block';
+        
         btn.innerText = "Login securely";
     }, 800);
+};
+
+window.handleLogout = function() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('dashboardItems');
+    
+    // Reset Navbar UI
+    const loginNavBtn = document.getElementById('navLoginBtn') || document.querySelector('button[onclick="showDashboard"]');
+    if(loginNavBtn) {
+        loginNavBtn.innerHTML = "Login <i class='bx bx-log-in'></i>";
+        loginNavBtn.onclick = () => showModal('Login');
+        loginNavBtn.classList.remove('btn-outline');
+        loginNavBtn.classList.add('btn-glow');
+        loginNavBtn.style.color = "";
+        loginNavBtn.style.borderColor = "";
+    }
+    
+    const logoutLi = document.getElementById('navLogoutLi');
+    if(logoutLi) logoutLi.style.display = 'none';
+    
+    // Go to home view
+    const discoverLink = document.querySelector('a[href="#home"]');
+    if(discoverLink) discoverLink.click();
+    
+    showToast("You have been logged out successfully.");
 };
 
 // --- 5. Custom HTML5 Video Player ---
